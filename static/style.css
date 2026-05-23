@@ -1,0 +1,238 @@
+/* select {
+
+}
+
+actions {
+
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+
+    background-image: url("fundo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.center {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #00132C;
+}
+
+.home_buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.home_buttons a,
+.voltar {
+    display: inline-block;
+    text-decoration: none;
+    background: linear-gradient(
+        140deg,
+        #00254A,
+        #00183B
+    );
+
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.home_buttons a:hover,
+.voltar:hover {
+    transform: scale(1.03);
+}
+
+form {
+    display: grid;
+    gap: 10px;
+}
+
+input,
+select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #3587d4;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.filtros form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.acoes {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.acoes a {
+    background: #673AB7;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+li {
+    background: rgba(255,255,255,0.95);
+    padding: 15px;
+    margin-top: 12px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.venda {
+    background: #e8f5e9;
+
+    border-left: 6px solid #2e7d32;
+}
+
+.venda_ja_feita {
+    text-decoration: line-through;
+
+    color: #888;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.tag.estudo {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.tag.trabalho {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.tag.pessoal {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.actions a {
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.editar {
+    color: #FF9800;
+}
+
+.concluir {
+    color: #4CAF50;
+}
+
+.deletar {
+    color: #e53935;
+}
+
+.done {
+    color: gray;
+}
+
+.home_container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home_card {
+    width: 500px;
+    background: rgba(255,255,255,0.88);
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    backdrop-filter: blur(4px);
+}
+
+.home_card h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
+    color: #00132C;
+}
+
+.home_card p {
+    color: #555;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.input_group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input_group input {
+    width: 100%;
+}
+
+.erro_texto {
+    color: #d32f2f;
+    font-size: 13px;
+    font-weight: bold;
+    background: #ffebee;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 4px solid #d32f2f;
+}

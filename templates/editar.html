@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Editar Informações do Carro</h1>
+        <a href="/carros">← Voltar</a>
+        <form method="POST">
+            <input name="nome" value="{{ carro.nome }}" required>
+            <input name="descricao" value="{{ carro.descricao }}">
+            <input name="ano" value="{{ carro.ano }}">
+            <input name="preco" value="{{ carro.preco }}">
+            <input name="descricao" value="{{ carro.descricao }}">
+
+            <select name="cor">
+
+                {% for c in categorias %}
+
+                <option value="{{ c }}" {% if carro.cor==c %}selected{% endif %}>
+                    {{ c }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <select name="cambio">
+
+                {% for c in categorias %}
+
+                <option value="{{ c }}" {% if carro.cambio==c %}selected{% endif %}>
+                    {{ c }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <select name="marca">
+
+                {% for c in categorias %}
+
+                <option value="{{ c }}" {% if carro.cambio==c %}selected{% endif %}>
+                    {{ c }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <select name="combustivel">
+
+                {% for c in categorias %}
+
+                <option value="{{ c }}" {% if carro.combustivel==c %}selected{% endif %}>
+                    {{ c }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <button>Salvar</button>
+        </form>
+    </div>
+</body>
+
+</html>
