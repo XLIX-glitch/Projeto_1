@@ -178,7 +178,6 @@ def carros_page():
     marca = request.args.get("marca")
     combustivel = request.args.get("combustivel")
     cor = request.args.get("cor")
-    status = request.args.get("status")
 
     carros_filtrados = carros
 
@@ -210,18 +209,6 @@ def carros_page():
         carros_filtrados = [
             carro for carro in carros_filtrados
             if carro["cor"] == cor
-        ]
-    
-    if status == "disponiveis":
-        carros_filtrados = [
-            carro for carro in carros_filtrados
-            if carro["disponivel"] 
-        ]
-    
-    elif status == "vendidos":
-        carros_filtrados = [
-            carro for carro in carros_filtrados
-            if not carro["disponivel"]
         ]
     
     return render_template(
@@ -290,7 +277,6 @@ def cadastrar():
             "cambio": cambio,
             "marca": marca,
             "combustivel": combustivel,
-            "disponivel": True
         }) 
 
         salvar_json(CARROS_FILE, carros)
@@ -316,20 +302,6 @@ def cadastrar():
         valor_combustivel=combustivel
     )
 
-@app.route("/vender/<string:id>")
-def vender(id):
-    carro = buscar_carro(id)
-    if carro:
-        carro["disponivel"] = False
-
-        salvar_json(CARROS_FILE, carros)
-    
-    return redirect(url_for("carros_page"))
-
-# @app.route("/vender_todos") -- Talvez adicionar
-def vender_todos():
-    pass
-
 @app.route("/deletar/<string:id>")
 def deletar(id):
     carro = buscar_carro(id)
@@ -341,31 +313,70 @@ def deletar(id):
 
 @app.route("/editar/<string:id>", methods=["GET", "POST"])
 def editar(id):
+
     carro = buscar_carro(id)
 
     if not carro:
         return redirect(url_for("carros_page"))
+
+    erro_nome = None
+    erro_preco = None
+
     if request.method == "POST":
-        carro["nome"] = request.form.get("nome")
-        carro["ano"] = request.form.get("ano")
-        carro["preco"] = request.form.get("preco")
-        
-        carro["cor"] = request.form.get("cor")
-        carro["cambio"] = request.form.get("cambio")
-        carro["marca"] = request.form.get("marca")
-        carro["combustiveis"] = request.form.get("combustiveis")
 
-        salvar_json(CARROS_FILE, carros)
+        nome = request.form.get("nome")
+        ano = request.form.get("ano")
+        preco = request.form.get("preco")
+        cor = request.form.get("cor")
+        cambio = request.form.get("cambio")
+        marca = request.form.get("marca")
+        combustivel = request.form.get("combustivel")
 
-        return redirect(url_for("carros_page"))
-    
+        if nome:
+            nome = nome.strip()
+            if len(nome) < 10:
+                erro_nome = "Nome inválido. O nome deve ter pelo menos 10 caracteres. Tente novamente!"
+                nome = None 
+
+        if preco:
+            try:
+                preco_digitado = float(preco)
+                if preco_digitado <= 5000:
+                    erro_preco = "O preço digitado é inválido. O valor mínimo é de R$ 5.000,00."
+                    preco = None
+
+                elif preco_digitado > 1000000:
+                    erro_preco = "O preço digitado é inválido. O valor máximo é de R$ 1.000.000,00"
+                    preco = None
+
+            except ValueError:
+                erro_preco = "O valor digitado é inválido. O preço deve ser um número. Tente novamente!"
+                preco = None
+
+        if not erro_nome and not erro_preco:
+
+            carro["nome"] = nome
+            carro["ano"] = ano
+            carro["preco"] = preco
+            carro["cor"] = cor
+            carro["cambio"] = cambio
+            carro["marca"] = marca
+            carro["combustivel"] = combustivel
+
+            salvar_json(CARROS_FILE, carros)
+
+            return redirect(url_for("carros_page"))
+
     return render_template(
         "editar.html",
         carro=carro,
+        anos=anos,
         cores=cores,
         cambios=cambios,
         marcas=marcas,
-        combustiveis=combustiveis
+        combustiveis=combustiveis,
+        erro_nome=erro_nome,
+        erro_preco=erro_preco
     )
 
 @app.route("/gerenciar")
@@ -385,33 +396,6 @@ def logout():
     session.clear()
 
     return redirect(url_for("home"))
-
-# @app.route("/cadastrar_cambio", methods=["POST"])
-# def cadastrar_cambio():
-#     cambio = request.form.get("cambio")
-#     if cambio and cambio not in cambios:
-#         cambios.append(cambio)
-#         salvar_json(CAMBIOS_FILE, cambios)
-
-#     return redirect(url_for("gerenciar"))
-
-# @app.route("/cadastrar_marca", methods=["POST"])
-# def cadastrar_marca():
-#     marca = request.form.get("marca")
-#     if marca and marca not in marcas:
-#         marcas.append(marca)
-#         salvar_json(MARCAS_FILE, marcas)
-
-#     return redirect(url_for("gerenciar"))
-
-# @app.route("/cadastrar_combustiveis", methods=["POST"])
-# def cadastrar_combustiveis():
-#     combustivel = request.form.get("combustivel")
-#     if combustivel and combustivel not in combustiveis:
-#         combustiveis.append(combustivel)
-#         salvar_json(TIPO_COMBUSTIVEL_FILE, combustiveis)
-
-#     return redirect(url_for("gerenciar"))
 
 if __name__ == "__main__":
     app.run(debug=True)

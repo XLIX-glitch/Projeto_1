@@ -6,5 +6,9 @@
     {
         "usuario": "Diego",
         "senha": "123456"
+    },
+    {
+        "usuario": "Lucas",
+        "senha": "123456"
     }
 ]

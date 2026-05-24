@@ -2,12 +2,12 @@
     {
         "id": "753be44d-63e4-4cdf-9e26-61675129e08c",
         "nome": "Fiat Uno 2009",
-        "ano": "2004",
+        "ano": "2001",
         "preco": "19821",
-        "cor": "Cinza",
+        "cor": "Branco",
         "cambio": "Automático",
         "marca": "Fiat",
-        "combustivel": "Etanol",
+        "combustivel": "Híbrido",
         "disponivel": true
     },
     {
@@ -44,14 +44,14 @@
         "disponivel": true
     },
     {
-        "id": "ed944c7e-5659-4288-9a06-07334b10375c",
-        "nome": "Fiat Uno 2001",
-        "ano": "Não informado",
-        "preco": "39090",
-        "cor": "Branco",
-        "cambio": "Manual",
-        "marca": "Ford",
-        "combustivel": "Gasolina",
+        "id": "79e38226-086e-49e5-a510-1bb044a36f4b",
+        "nome": "Fiat Uno 2000",
+        "ano": "2002",
+        "preco": "19821",
+        "cor": "Preto",
+        "cambio": "Automático",
+        "marca": "Hyundai",
+        "combustivel": "Etanol",
         "disponivel": true
     }
 ]

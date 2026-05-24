@@ -29,7 +29,7 @@
                 {% endif %}
             </div>
 
-            <select name="ano_fabricacao" title="Por favor, preencha o ano do carro" required>
+            <select name="ano" title="Por favor, preencha o ano do carro" required>
                 <option value="">Ano de Fabricação</option>
 
                 {% for c in anos %}
@@ -84,8 +84,32 @@
         <div class="filtros">
             <h1>Aplicar filtros</h1>
             <form method="GET" action="/carros">
+                <select name="ano">
+                    <option value="">Todos os Anos</option>
+
+                    {% for c in anos %}
+
+                    <option value="{{ c }}" {% if request.args.get('ano')==c %}selected{% endif %}>
+                        {{ c }}
+                    </option>
+
+                    {% endfor %}
+                </select>
+
+                <select name="cor">
+                    <option value="">Todas as Cores</option>
+
+                    {% for c in cores %}
+
+                    <option value="{{ c }}" {% if request.args.get('cor')==c %}selected{% endif %}>
+                        {{ c }}
+                    </option>
+
+                    {% endfor %}
+                </select>
+
                 <select name="cambio">
-                    <option value=""> Todos os Câmbios</option>
+                    <option value="">Todos os Câmbios</option>
 
                     {% for c in cambios %}
 
@@ -120,50 +144,55 @@
                     {% endfor %}
                 </select>
 
-                <select name="status">
-                    <option value="">
-                        Todos os Carros
-                    </option>
-
-                    <option value="vendidos" {% if request.args.get('status')=='vendidos' %}selected{% endif %}>
-                        Vendidos
-                    </option>
-
-                    <option value="disponiveis" {% if request.args.get('status')=='disponiveis' %}selected{% endif %}>
-                        Disponíveis
-                    </option>
-                </select>
-
                 <button type="submit">Filtrar</button>
             </form>
         </div>
 
         <ul>
             {% for carro in carros %}
-            <li class="{% if carro.disponivel %}venda{% endif %}">
-                <div class="{% if carro.disponivel %}venda_ja_feita{% endif %}">
-                    <strong>{{ carro.nome }}</strong>
-                </div>
-                <div>{{ carro.ano }}</div>
-                <div>{{ carro.preco }}</div>
+            <li>
+                <div class="carro_titulo">{{ carro.nome }}</div>
 
-                <div class="tag {{ carro.cor }}">
-                    {{ carro.cor }}
-                </div>
-                <div class="tag {{ carro.cambio }}">
-                    {{ carro.cambio }}
-                </div>
-                <div class="tag {{ carro.marca }}">
-                    {{ carro.marca }}
-                </div>
-                <div class="tag {{ carro.combustivel }}">
-                    {{ carro.combustivel }}
+                <div class="carro_info">
+                    <div class="carro_info_item">
+                        <div class="carro_info_categoria">Ano</div>
+                        <div class="carro_info_valor">{{ carro.ano }}</div>
+                    </div>
+
+                    <div class="carro_info_item">
+                        <div class="carro_info_categoria">Preço</div>
+                        <div class="carro_info_valor">{{ carro.preco }}</div>
+                    </div>
+
+                    <div class="carro_info_item">
+                        <div class="carro_info_categoria">Ano</div>
+                        <div class="carro_info_valor">{{ carro.ano }}</div>
+                    </div>
+
+                    <div class="carro_info_item">
+                        <div class="carro_info_categoria">Cor</div>
+                        <div class="carro_info_valor">{{ carro.cor }}</div>
+                    </div>
+
+                    <div class="carro_info_item">
+                        <div class="carro_info_categoria">Câmbio</div>
+                        <div class="carro_info_valor">{{ carro.cambio }}</div>
+                    </div>
+
+                    <div class="carro_info_item">
+                        <div class="carro_info_categoria">Marca</div>
+                        <div class="carro_info_valor">{{ carro.marca }}</div>
+                    </div>
+
+                    <div class="carro_info_item">
+                        <div class="carro_info_categoria">Combustível</div>
+                        <div class="carro_info_valor">{{ carro.combustivel }}</div>
+                    </div>
                 </div>
 
                 <div class="actions">
-                    <a class="" href="/editar/{{ carro.id }}">✏</a>
-                    <a class="" href="/vender/{{ carro.id }}">✔</a>
-                    <a class="" href="/deletar/{{ carro.id }}">✖</a>
+                    <a class="editar" href="/editar/{{ carro.id }}">✏</a>
+                    <a class="deletar" href="/deletar/{{ carro.id }}">✖</a>
                 </div>
             </li>
 
