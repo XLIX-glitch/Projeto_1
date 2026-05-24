@@ -236,3 +236,46 @@ li {
     border-radius: 8px;
     border-left: 4px solid #d32f2f;
 }
+
+.auth_links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.auth_links a {
+    color: #00183B;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.auth_links a:hover {
+    opacity: 0.7;
+}
+
+.logout_button {
+    display: inline-block;
+    background: #d32f2f;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.logout_button:hover {
+    transform: scale(1.03);
+}
+
+.sucesso_texto {
+    color: #2e7d32;
+    font-size: 13px;
+    font-weight: bold;
+    background: #e8f5e9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 4px solid #2e7d32;
+}

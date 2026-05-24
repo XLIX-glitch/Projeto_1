@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import uuid
 import json
 import os
 
 app = Flask(__name__)
+
+app.secret_key = "fc_company"
 
 CARROS_FILE = "database/carros_cadastrados.json"
 CAMBIOS_FILE = "database/cambio.json"
@@ -11,6 +13,7 @@ MARCAS_FILE = "database/marca.json"
 TIPO_COMBUSTIVEL_FILE = "database/tipo_combustivel.json"
 CORES_FILE = "database/cor.json"
 ANOS_FILE = "database/anos.json"
+USUARIOS_FILE = "database/usuarios.json"
 
 def carregar_json(arquivo):
     if not os.path.exists(arquivo):
@@ -29,6 +32,7 @@ marcas = carregar_json(MARCAS_FILE)
 combustiveis = carregar_json(TIPO_COMBUSTIVEL_FILE)
 cores = carregar_json(CORES_FILE)
 anos = carregar_json(ANOS_FILE)
+usuarios = carregar_json(USUARIOS_FILE)
 
 if not cambios:
     cambios = [
@@ -73,6 +77,9 @@ if not cores:
 
     salvar_json(CORES_FILE, cores)
 
+def usuario_logado():
+    return session.get("usuario")
+
 def gerar_id():
     return str(uuid.uuid4())
 
@@ -82,9 +89,80 @@ def buscar_carro(id):
 @app.route("/")
 def home():
     return render_template("home.html")
+    
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    erro = None
+
+    if request.method == "POST":
+
+        usuario = request.form.get("usuario")
+        senha = request.form.get("senha")
+
+        for user in usuarios:
+
+            if (
+                user["usuario"] == usuario
+                and
+                user["senha"] == senha
+            ):
+
+                session["usuario"] = usuario
+
+                return redirect(url_for("carros_page"))
+
+        erro = "Usuário ou senha inválidos"
+
+    return render_template(
+        "login.html",
+        erro=erro
+    )
+    
+@app.route("/cadastro", methods=["GET", "POST"])
+def cadastro():
+
+    erro = None
+
+    if request.method == "POST":
+
+        usuario = request.form.get("usuario")
+        senha = request.form.get("senha")
+
+        for user in usuarios:
+
+            if user["usuario"] == usuario:
+
+                erro = "Usuário já existe"
+
+                return render_template(
+                    "cadastro.html",
+                    erro=erro
+                )
+
+        usuarios.append({
+            "usuario": usuario,
+            "senha": senha
+        })
+
+        salvar_json(
+            USUARIOS_FILE,
+            usuarios
+        )
+
+        return redirect(url_for("home"))
+
+    return render_template(
+        "cadastro.html",
+        erro=erro
+    )
 
 @app.route("/carros", methods=["GET"])
+@app.route("/carros", methods=["GET"])
 def carros_page():
+
+    if not usuario_logado():
+        return redirect(url_for("login"))
     ano = request.args.get("ano")
     cambio = request.args.get("cambio")
     marca = request.args.get("marca")
@@ -289,6 +367,13 @@ def gerenciar():
         marcas=marcas,
         combustiveis=combustiveis
     )
+    
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect(url_for("home"))
 
 # @app.route("/cadastrar_cambio", methods=["POST"])
 # def cadastrar_cambio():

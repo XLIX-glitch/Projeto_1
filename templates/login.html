@@ -5,11 +5,60 @@
 
     <meta charset="UTF-8">
 
-    <title>FC Company</title>
+    <title>Login</title>
 
     <link rel="stylesheet"
     href="{{ url_for('static', filename='style.css') }}">
 
 </head>
-    <button
-<body>>
+
+<body>
+
+<div class="home_container">
+
+    <div class="home_card">
+
+        <h1>Login</h1>
+
+        <form method="POST">
+
+            <div class="input_group">
+
+                <input
+                    type="text"
+                    name="usuario"
+                    placeholder="Usuário"
+                    required
+                >
+
+            </div>
+
+            <div class="input_group">
+
+                <input
+                    type="password"
+                    name="senha"
+                    placeholder="Senha"
+                    required
+                >
+
+            </div>
+
+            {% if erro %}
+                <div class="erro_texto">
+                    {{ erro }}
+                </div>
+            {% endif %}
+
+            <button type="submit">
+                Entrar
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
