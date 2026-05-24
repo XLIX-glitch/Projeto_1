@@ -11,17 +11,6 @@
         "disponivel": true
     },
     {
-        "id": "03d46abe-2d33-4ace-969a-6b39be7e2eb6",
-        "nome": "Fiat Uno 2001",
-        "ano": "2001",
-        "preco": "10000",
-        "cor": "Preto",
-        "cambio": "Automático",
-        "marca": "Fiat",
-        "combustivel": "Gasolina",
-        "disponivel": true
-    },
-    {
         "id": "e091ced9-dcc7-4ac2-8a49-1d506db74be8",
         "nome": "Fiat Uno 2001",
         "ano": "2002",
@@ -53,5 +42,15 @@
         "marca": "Hyundai",
         "combustivel": "Etanol",
         "disponivel": true
+    },
+    {
+        "id": "7ec07615-ad88-459a-8e89-d71b74d4db20",
+        "nome": "Fiat Uno 2000",
+        "ano": "2001",
+        "preco": "19821",
+        "cor": "Branco",
+        "cambio": "Manual",
+        "marca": "Fiat",
+        "combustivel": "Gasolina"
     }
 ]

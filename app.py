@@ -104,20 +104,25 @@ def login():
             usuario = usuario.strip()
         if senha:
             senha = senha.strip()
+        if usuario and (len(usuario) < 3 or len(usuario) > 40):
+            erro = "Usuário inválido. O nome deve ter entre 3 e 40 caracteres."
 
-        for user in usuarios:
+        elif senha and (len(senha) < 4 or len(senha) > 20):
+            erro = "Senha inválida. A senha deve ter entre 4 e 20 caracteres."
+        else:
+            for user in usuarios:
 
-            if (
-                user["usuario"] == usuario
-                and
-                user["senha"] == senha
-            ):
+                if (
+                    user["usuario"] == usuario
+                    and
+                    user["senha"] == senha
+                ):
 
-                session["usuario"] = usuario
+                    session["usuario"] = usuario
 
-                return redirect(url_for("carros_page"))
+                    return redirect(url_for("carros_page"))
 
-        erro = "Usuário ou senha inválidos"
+            erro = "Usuário ou senha inválidos"
 
     return render_template(
         "login.html",
@@ -138,6 +143,20 @@ def cadastro():
             usuario = usuario.strip()
         if senha:
             senha = senha.strip()
+
+        if usuario and (len(usuario) < 3 or len(usuario) > 40):
+            erro = "Usuário inválido. O nome deve ter entre 3 e 40 caracteres."
+            return render_template(
+                "cadastro.html",
+                erro=erro
+            )
+        
+        if senha and (len(senha) < 4 or len(senha) > 20):
+            erro = "Senha inválida. A senha deve ter entre 4 e 20 caracteres."
+            return render_template(
+                "cadastro.html",
+                erro=erro
+            )
 
         for user in usuarios:
 
@@ -237,7 +256,7 @@ def cadastrar():
 
     if nome:
         nome = nome.strip()
-        if len(nome) < 10:
+        if len(nome) < 10 or len(nome) >= 100:
             erro_nome = "Nome inválido. O nome deve ter pelo menos 10 caracteres. Tente novamente!"
             nome = None 
 
