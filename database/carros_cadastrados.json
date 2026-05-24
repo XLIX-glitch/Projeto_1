@@ -42,5 +42,16 @@
         "marca": "Fiat",
         "combustivel": "Etanol",
         "disponivel": true
+    },
+    {
+        "id": "ed944c7e-5659-4288-9a06-07334b10375c",
+        "nome": "Fiat Uno 2001",
+        "ano": "Não informado",
+        "preco": "39090",
+        "cor": "Branco",
+        "cambio": "Manual",
+        "marca": "Ford",
+        "combustivel": "Gasolina",
+        "disponivel": true
     }
 ]

@@ -62,11 +62,17 @@ h1 {
     border-radius: 8px;
     font-weight: bold;
     transition: 0.3s;
+    margin: 10px 0px;
 }
 
 .home_buttons a:hover,
 .voltar:hover {
     transform: scale(1.03);
+}
+
+.voltar_a_esquerda {
+    text-align: left;
+    margin-bottom: 20px;
 }
 
 form {
@@ -90,10 +96,12 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    margin: 12px;
 }
 
 button:hover {
     opacity: 0.9;
+    transform: scale(1.03);
 }
 
 .filtros form {

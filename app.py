@@ -100,6 +100,11 @@ def login():
         usuario = request.form.get("usuario")
         senha = request.form.get("senha")
 
+        if usuario:
+            usuario = usuario.strip()
+        if senha:
+            senha = senha.strip()
+
         for user in usuarios:
 
             if (
@@ -128,6 +133,11 @@ def cadastro():
 
         usuario = request.form.get("usuario")
         senha = request.form.get("senha")
+
+        if usuario:
+            usuario = usuario.strip()
+        if senha:
+            senha = senha.strip()
 
         for user in usuarios:
 
@@ -293,6 +303,7 @@ def cadastrar():
         cambios=cambios,
         marcas=marcas,
         combustiveis=combustiveis,
+        carros=carros,
         erro_nome=erro_nome,
         erro_preco=erro_preco,
 

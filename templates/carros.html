@@ -22,7 +22,8 @@
             </div>
 
             <div class="input_group">
-                <input name="preco" placeholder="Preço" type="number" title="Por favor, preencha o preço do carro" required>
+                <input name="preco" placeholder="Preço" type="number" title="Por favor, preencha o preço do carro"
+                    required>
                 {% if erro_preco %}
                 <span class="erro_texto">{{ erro_preco }}</span>
                 {% endif %}
@@ -33,7 +34,7 @@
 
                 {% for c in anos %}
 
-                <option value="{{ c }}" {% if valor_ano == c %}selected{% endif %}>{{ c }}</option>
+                <option value="{{ c }}" {% if valor_ano==c %}selected{% endif %}>{{ c }}</option>
 
                 {% endfor %}
             </select>
@@ -43,7 +44,7 @@
 
                 {% for c in cores %}
 
-                <option value="{{ c }}" {% if valor_cor == c %}selected{% endif %}>{{ c }}</option>
+                <option value="{{ c }}" {% if valor_cor==c %}selected{% endif %}>{{ c }}</option>
 
                 {% endfor %}
             </select>
@@ -53,7 +54,7 @@
 
                 {% for c in cambios %}
 
-                <option value="{{ c }}" {% if valor_cambio == c %}selected{% endif %}>{{ c }}</option>
+                <option value="{{ c }}" {% if valor_cambio==c %}selected{% endif %}>{{ c }}</option>
 
                 {% endfor %}
             </select>
@@ -63,7 +64,7 @@
 
                 {% for c in marcas %}
 
-                <option value="{{ c }}" {% if valor_marca == c %}selected{% endif %}>{{ c }}</option>
+                <option value="{{ c }}" {% if valor_marca==c %}selected{% endif %}>{{ c }}</option>
 
                 {% endfor %}
             </select>
@@ -73,14 +74,15 @@
 
                 {% for c in combustiveis %}
 
-                <option value="{{ c }}" {% if valor_combustivel == c %}selected{% endif %}>{{ c }}</option>
+                <option value="{{ c }}" {% if valor_combustivel==c %}selected{% endif %}>{{ c }}</option>
 
                 {% endfor %}
             </select>
 
             <button type="submit">Adicionar</button>
         </form>
-        <div>
+        <div class="filtros">
+            <h1>Aplicar filtros</h1>
             <form method="GET" action="/carros">
                 <select name="cambio">
                     <option value=""> Todos os Câmbios</option>
@@ -173,9 +175,9 @@
         </ul>
     </div>
 
-<a href="/logout">
-    Sair
-</a>
+    <a href="/logout">
+        Sair
+    </a>
 
 </body>
 
