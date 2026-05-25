@@ -187,7 +187,6 @@ def cadastro():
     )
 
 @app.route("/carros", methods=["GET"])
-@app.route("/carros", methods=["GET"])
 def carros_page():
 
     if not usuario_logado():

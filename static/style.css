@@ -171,10 +171,8 @@ li {
 }
 
 .carro_info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .carro_info_item {
@@ -214,7 +212,7 @@ li {
     padding: 8px 12px;
     border-radius: 6px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 30px;
     transition: 0.3s;
 }
 
